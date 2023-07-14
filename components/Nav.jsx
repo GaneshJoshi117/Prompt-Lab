@@ -12,9 +12,14 @@ const Nav = () => {
 	const [toggleDropdown, setToggleDropdown] = useState(false);
 	const router = useRouter();
 
-	const signoutHandler = () => {
+	const signoutHandler = async () => {
+		await signOut();
 		router.push('/');
-		signOut();
+	};
+
+	const signInHandler = async (provider) => {
+		await signIn(provider.id);
+		router.push('/');
 	};
 
 	useEffect(() => {
@@ -67,7 +72,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={() => signIn(provider.id)}
+									onClick={() => signInHandler(provider)}
 									className="black_btn">
 									Sign In
 								</button>
@@ -122,7 +127,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={() => signIn(provider.id)}
+									onClick={() => signInHandler(provider)}
 									className="black_btn">
 									Sign In
 								</button>
