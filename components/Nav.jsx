@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 const Nav = () => {
 	const { data: session } = useSession();
@@ -12,16 +12,14 @@ const Nav = () => {
 	const [toggleDropdown, setToggleDropdown] = useState(false);
 	const router = useRouter();
 
-	const signoutHandler = async (e) => {
-		e.preventDefault();
+	const signoutHandler = async () => {
 		await signOut();
-		router.push('/');
+		redirect('/');
 	};
 
-	const signInHandler = async (e, provider) => {
-		e.preventDefault();
+	const signInHandler = async (provider) => {
 		await signIn(provider.id);
-		router.push('/');
+		redirect('/');
 	};
 
 	useEffect(() => {
@@ -53,7 +51,7 @@ const Nav = () => {
 						</Link>
 						<button
 							type="button"
-							onClick={(e) => signoutHandler(e)}
+							onClick={signoutHandler}
 							className="outline_btn">
 							Sign Out
 						</button>
@@ -74,7 +72,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={(e) => signInHandler(e, provider)}
+									onClick={() => signInHandler(provider)}
 									className="black_btn">
 									Sign In
 								</button>
@@ -129,7 +127,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={(e) => signInHandler(e, provider)}
+									onClick={() => signInHandler(provider)}
 									className="black_btn">
 									Sign In
 								</button>

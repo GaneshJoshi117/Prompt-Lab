@@ -17,19 +17,17 @@ const handler = NextAuth({
 			await connectToDB();
 			const sessionUser = await User.findOne({
 				email: session?.user.email,
-			}).maxTimeMS(20000);
+			});
 			session.user.id = sessionUser._id.toString();
 			return session;
 		},
 		async signIn({ profile }) {
 			try {
 				await connectToDB();
-
 				//check if user already exists
 				const userExists = await User.findOne({
 					email: profile.email,
 				});
-
 				//if not create new user
 				if (!userExists) {
 					await User.create({
@@ -38,6 +36,7 @@ const handler = NextAuth({
 						image: profile.picture,
 					});
 				}
+				this.redirect('/');
 				return true;
 			} catch (error) {
 				console.log(error);
