@@ -6,6 +6,9 @@ import Provider from '@components/Provider';
 export const metadata = {
 	title: 'Prompt Lab',
 	description: 'Discover and share AI prompts',
+	author: 'Ganesh Joshi',
+	keywords: 'ai, prompts, ai prompts, prompt lab',
+	viewport: 'width=device-width, initial-scale=1.0',
 };
 
 const RootLayout = ({ children }) => {
