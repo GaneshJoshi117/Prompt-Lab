@@ -36,7 +36,6 @@ const handler = NextAuth({
 						image: profile.picture,
 					});
 				}
-				this.redirect('/');
 				return true;
 			} catch (error) {
 				console.log(error);

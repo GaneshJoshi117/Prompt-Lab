@@ -13,13 +13,11 @@ const Nav = () => {
 	const router = useRouter();
 
 	const signoutHandler = async () => {
-		await signOut();
-		redirect('/');
+		await signOut({ callbackUrl: 'https://prompt-lab-hx3m.vercel.app/' });
 	};
 
 	const signInHandler = async (provider) => {
 		await signIn(provider.id);
-		redirect('/');
 	};
 
 	useEffect(() => {
