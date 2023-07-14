@@ -12,12 +12,14 @@ const Nav = () => {
 	const [toggleDropdown, setToggleDropdown] = useState(false);
 	const router = useRouter();
 
-	const signoutHandler = async () => {
+	const signoutHandler = async (e) => {
+		e.preventDefault();
 		await signOut();
 		router.push('/');
 	};
 
-	const signInHandler = async (provider) => {
+	const signInHandler = async (e, provider) => {
+		e.preventDefault();
 		await signIn(provider.id);
 		router.push('/');
 	};
@@ -51,7 +53,7 @@ const Nav = () => {
 						</Link>
 						<button
 							type="button"
-							onClick={signoutHandler}
+							onClick={(e) => signoutHandler(e)}
 							className="outline_btn">
 							Sign Out
 						</button>
@@ -72,7 +74,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={() => signInHandler(provider)}
+									onClick={(e) => signInHandler(e, provider)}
 									className="black_btn">
 									Sign In
 								</button>
@@ -127,7 +129,7 @@ const Nav = () => {
 								<button
 									type="button"
 									key={provider.name}
-									onClick={() => signInHandler(provider)}
+									onClick={(e) => signInHandler(e, provider)}
 									className="black_btn">
 									Sign In
 								</button>
